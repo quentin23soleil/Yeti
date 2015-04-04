@@ -10,6 +10,7 @@ import android.support.v7.internal.widget.ActivityChooserModel;
 import android.support.v7.internal.widget.ActivityChooserModel.OnChooseActivityListener;
 import android.support.v7.internal.widget.ActivityChooserView;
 import android.support.v7.internal.widget.TintManager;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +22,7 @@ public class YetiActionProvider extends ActionProvider {
 
     public YetiActionProvider(Context context) {
         super(context);
-        this.mContext = context;
+        this.context = context;
 
     }
 
@@ -33,12 +34,12 @@ public class YetiActionProvider extends ActionProvider {
     /**
      * The the maximum number activities shown in the sub-menu.
      */
-    private int mMaxShownActivityCount = DEFAULT_INITIAL_ACTIVITY_COUNT;
+    private int maxShownActivityCount = DEFAULT_INITIAL_ACTIVITY_COUNT;
 
     /**
      * Listener for handling menu item clicks.
      */
-    private final ShareMenuItemOnMenuItemClickListener mOnMenuItemClickListener =
+    private final ShareMenuItemOnMenuItemClickListener shareMenuItemOnMenuItemClickListener =
             new ShareMenuItemOnMenuItemClickListener();
 
     /**
@@ -49,14 +50,14 @@ public class YetiActionProvider extends ActionProvider {
     /**
      * Context for accessing resources.
      */
-    private final Context mContext;
+    private final Context context;
 
     /**
      * The name of the file with share history data.
      */
-    private String mShareHistoryFileName = DEFAULT_SHARE_HISTORY_FILE_NAME;
+    private String shareHistoryFileName = DEFAULT_SHARE_HISTORY_FILE_NAME;
 
-    private OnChooseActivityListener mOnChooseActivityListener;
+    private OnChooseActivityListener onChooseActivityListener;
 
     /**
      * {@inheritDoc}
@@ -64,14 +65,14 @@ public class YetiActionProvider extends ActionProvider {
     @Override
     public View onCreateActionView() {
         // Create the view and set its data model.
-        ActivityChooserModel dataModel = ActivityChooserModel.get(mContext, mShareHistoryFileName);
-        ActivityChooserView activityChooserView = new ActivityChooserView(mContext);
+        ActivityChooserModel dataModel = ActivityChooserModel.get(context, shareHistoryFileName);
+        ActivityChooserView activityChooserView = new ActivityChooserView(context);
         activityChooserView.setActivityChooserModel(dataModel);
 
         // Lookup and set the expand action icon.
         TypedValue outTypedValue = new TypedValue();
-        mContext.getTheme().resolveAttribute(R.attr.actionModeShareDrawable, outTypedValue, true);
-        Drawable drawable = TintManager.getDrawable(mContext, outTypedValue.resourceId);
+        context.getTheme().resolveAttribute(R.attr.actionModeShareDrawable, outTypedValue, true);
+        Drawable drawable = TintManager.getDrawable(context, outTypedValue.resourceId);
         activityChooserView.setExpandActivityOverflowButtonDrawable(drawable);
         activityChooserView.setProvider(this);
 
@@ -100,30 +101,30 @@ public class YetiActionProvider extends ActionProvider {
         // Clear since the order of items may change.
         subMenu.clear();
 
-        ActivityChooserModel dataModel = ActivityChooserModel.get(mContext, mShareHistoryFileName);
-        PackageManager packageManager = mContext.getPackageManager();
+        ActivityChooserModel dataModel = ActivityChooserModel.get(context, shareHistoryFileName);
+        PackageManager packageManager = context.getPackageManager();
 
         final int expandedActivityCount = dataModel.getActivityCount();
-        final int collapsedActivityCount = Math.min(expandedActivityCount, mMaxShownActivityCount);
+        final int collapsedActivityCount = Math.min(expandedActivityCount, maxShownActivityCount);
 
         // Populate the sub-menu with a sub set of the activities.
         for (int i = 0; i < collapsedActivityCount; i++) {
             ResolveInfo activity = dataModel.getActivity(i);
             subMenu.add(0, i, i, activity.loadLabel(packageManager))
                     .setIcon(activity.loadIcon(packageManager))
-                    .setOnMenuItemClickListener(mOnMenuItemClickListener);
+                    .setOnMenuItemClickListener(shareMenuItemOnMenuItemClickListener);
         }
 
         if (collapsedActivityCount < expandedActivityCount) {
             // Add a sub-menu for showing all activities as a list item.
             SubMenu expandedSubMenu = subMenu.addSubMenu(Menu.NONE, collapsedActivityCount,
                     collapsedActivityCount,
-                    mContext.getString(R.string.abc_activity_chooser_view_see_all));
+                    context.getString(R.string.abc_activity_chooser_view_see_all));
             for (int i = 0; i < expandedActivityCount; i++) {
                 ResolveInfo activity = dataModel.getActivity(i);
                 expandedSubMenu.add(0, i, i, activity.loadLabel(packageManager))
                         .setIcon(activity.loadIcon(packageManager))
-                        .setOnMenuItemClickListener(mOnMenuItemClickListener);
+                        .setOnMenuItemClickListener(shareMenuItemOnMenuItemClickListener);
             }
         }
     }
@@ -160,7 +161,7 @@ public class YetiActionProvider extends ActionProvider {
      * @param shareHistoryFile The share history file name.
      */
     public void setShareHistoryFileName(String shareHistoryFile) {
-        mShareHistoryFileName = shareHistoryFile;
+        shareHistoryFileName = shareHistoryFile;
         setActivityChooserPolicyIfNeeded();
     }
 
@@ -183,8 +184,8 @@ public class YetiActionProvider extends ActionProvider {
      * @see Intent#ACTION_SEND_MULTIPLE
      */
     public void setShareIntent(Intent shareIntent) {
-        ActivityChooserModel dataModel = ActivityChooserModel.get(mContext,
-                mShareHistoryFileName);
+        ActivityChooserModel dataModel = ActivityChooserModel.get(context,
+                shareHistoryFileName);
         dataModel.setIntent(shareIntent);
     }
 
@@ -194,13 +195,13 @@ public class YetiActionProvider extends ActionProvider {
     private class ShareMenuItemOnMenuItemClickListener implements OnMenuItemClickListener {
         @Override
         public boolean onMenuItemClick(MenuItem item) {
-            ActivityChooserModel dataModel = ActivityChooserModel.get(mContext,
-                    mShareHistoryFileName);
+            ActivityChooserModel dataModel = ActivityChooserModel.get(context,
+                    shareHistoryFileName);
             final int itemId = item.getItemId();
             Intent launchIntent = dataModel.chooseActivity(itemId);
             if (launchIntent != null) {
                 launchIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-                mContext.startActivity(launchIntent);
+                context.startActivity(launchIntent);
             }
             return true;
         }
@@ -214,11 +215,11 @@ public class YetiActionProvider extends ActionProvider {
         if (onShareListener == null) {
             return;
         }
-        if (mOnChooseActivityListener == null) {
-            mOnChooseActivityListener = new ShareActivityChooserModelPolicy();
+        if (onChooseActivityListener == null) {
+            onChooseActivityListener = new ShareActivityChooserModelPolicy();
         }
-        ActivityChooserModel dataModel = ActivityChooserModel.get(mContext, mShareHistoryFileName);
-        dataModel.setOnChooseActivityListener(mOnChooseActivityListener);
+        ActivityChooserModel dataModel = ActivityChooserModel.get(context, shareHistoryFileName);
+        dataModel.setOnChooseActivityListener(onChooseActivityListener);
     }
 
     private class ShareActivityChooserModelPolicy implements ActivityChooserModel.OnChooseActivityListener {
