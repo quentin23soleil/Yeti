@@ -235,7 +235,7 @@ public class ResolverAdapter extends RecyclerView.Adapter<ResolverAdapter.ViewHo
 
         public ViewHolder(View itemView) {
             super(itemView);
-            text = (TextView) itemView;
+            text = (TextView) itemView.findViewById(R.id.title);
         }
     }
 

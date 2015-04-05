@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="Using normal share\n(starting intent ACTION_SEND, kindof)"
+        android:layout_width="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/normal_share_button"
+        android:text="Normal share"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

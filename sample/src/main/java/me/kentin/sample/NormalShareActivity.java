@@ -1,28 +1,41 @@
 package me.kentin.sample;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.view.View;
+import android.widget.Button;
 
 import me.kentin.yeti.Yeti;
 import me.kentin.yeti.listener.OnShareListener;
 
-public class NormalShareActivity extends Activity {
+public class NormalShareActivity extends ActionBarActivity {
 
     private static final int REQUEST_CODE_YETI = 0;
     private Yeti yeti;
+    private Intent shareIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        yeti = Yeti.with(this);
+        setContentView(R.layout.activity_normal);
 
-        Intent shareIntent = new Intent();
+        shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT, "This is the text BEFORE you change it bro. (if you want huh)");
 
-        startActivityForResult(yeti.share(shareIntent), REQUEST_CODE_YETI);
+        yeti = Yeti.with(this);
+
+
+        Button button = (Button) findViewById(R.id.normal_share_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(yeti.share(shareIntent), REQUEST_CODE_YETI);
+            }
+        });
+
     }
 
     @Override

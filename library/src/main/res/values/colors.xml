@@ -3,4 +3,5 @@
     <color name="white">@android:color/white</color>
     <color name="background_light">#ffeeeeee</color>
     <color name="background_dark">#ff303030</color>
+    <color name="pressed_item">#ff808080</color>
 </resources>

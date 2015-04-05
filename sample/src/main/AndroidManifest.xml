@@ -18,10 +18,23 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="me.kentin.sample.ActionProviderActivity"
+            android:label="@string/app_name"/>
+
+        <activity
+            android:name="me.kentin.sample.NormalShareActivity"
+            android:label="@string/app_name"/>
+
+
+
+        <!-- You HAVE to add is to YOUR manifest. Otherwise, it's not gonna work -->
         <activity android:name="me.kentin.yeti.activity.YetiShareActivity"
             android:excludeFromRecents="true"
             android:theme="@style/BottomSheet.Light"
             tools:ignore="UnusedAttribute" />
+        <!---->
+
     </application>
 
 </manifest>

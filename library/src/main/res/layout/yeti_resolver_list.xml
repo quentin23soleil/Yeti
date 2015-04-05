@@ -3,6 +3,7 @@
     android:id="@+id/resolver_contentPanel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
     android:maxWidth="@dimen/resolver_max_width"
     app:maxCollapsedHeight="144dp">
 
@@ -16,6 +17,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:background="@color/background_light"
             android:layout_height="64dp"
             android:orientation="horizontal">
 
@@ -39,6 +41,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black"
                 android:gravity="start|center_vertical"
                 android:paddingEnd="16dp"
                 android:paddingRight="16dp" />
@@ -54,6 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_light"
+        android:descendantFocusability="blocksDescendants"
         android:id="@+id/resolver_recyclerview"
         android:scrollbars="vertical" />
 

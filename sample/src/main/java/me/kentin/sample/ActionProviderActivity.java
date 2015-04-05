@@ -1,16 +1,16 @@
 package me.kentin.sample;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import me.kentin.yeti.YetiActionProvider;
 import me.kentin.yeti.listener.OnShareListener;
 
-public class ActionProviderActivity extends Activity {
+public class ActionProviderActivity extends ActionBarActivity {
 
     private YetiActionProvider yetiActionProvider;
     private Intent shareIntent;
@@ -18,6 +18,7 @@ public class ActionProviderActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_provider);
 
         shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
@@ -29,7 +30,7 @@ public class ActionProviderActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar/toolbar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_actionprovideractivity, menu);
 
         // Locate MenuItem with YetiActionProvider
         MenuItem item = menu.findItem(R.id.menu_item_share);
@@ -39,6 +40,7 @@ public class ActionProviderActivity extends Activity {
 
         // You don't have to Override everything though, just what you want
         yetiActionProvider.setOnShareListener(shareListener);
+        yetiActionProvider.setShareIntent(shareIntent);
 
         return true;
     }
