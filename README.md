@@ -1,4 +1,4 @@
-# Yeti - Control what you share [![Build Status](https://travis-ci.org/dommerq/Yeti.svg?branch=master)](https://travis-ci.org/dommerq/Yeti) ![](https://bintray.com/dommerq/Maven/Yeti/_latestVersion)
+# Yeti - Control what you share [![Build Status](https://travis-ci.org/dommerq/Yeti.svg?branch=master)](https://travis-ci.org/dommerq/Yeti) [![Build version](https://bintray.com/dommerq/Maven/Yeti/_latestVersion)](https://bintray.com/dommerq/Maven/Yeti/_latestVersion)
 
 Do you want to customize what you share, depending on what the user wants to share it with?
 
@@ -8,7 +8,7 @@ Let's say you want to add a "via @theTwitterAccountOfYourProduct" if the content
 ###**BOOM! That's what Yeti does.**
 
 
-## Add to your project ![](https://bintray.com/dommerq/Maven/Yeti/_latestVersion)
+## Add to your project  [![Build version](https://bintray.com/dommerq/Maven/Yeti/_latestVersion)](https://bintray.com/dommerq/Maven/Yeti/_latestVersion)
 
 **Gradle (jcenter)**
 ```groovy
@@ -21,7 +21,6 @@ Who uses that? Seriously.
 ```
 
 Or you can clone it and import `yeti` as a module.
-
 
 
 ## Usage
