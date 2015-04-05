@@ -10,13 +10,15 @@ import android.support.v7.internal.widget.ActivityChooserModel;
 import android.support.v7.internal.widget.ActivityChooserModel.OnChooseActivityListener;
 import android.support.v7.internal.widget.ActivityChooserView;
 import android.support.v7.internal.widget.TintManager;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.SubMenu;
 import android.view.View;
+
+import me.kentin.yeti.listener.OnShareListener;
+import me.kentin.yeti.utils.SharePackageHelper;
 
 public class YetiActionProvider extends ActionProvider {
 
@@ -230,17 +232,17 @@ public class YetiActionProvider extends ActionProvider {
                 SharePackageHelper.ApplicationType applicationType = new SharePackageHelper().getApplicationType(intent);
 
                 if (applicationType == SharePackageHelper.ApplicationType.Twitter) {
-                    return onShareListener.shareWithTwitter(YetiActionProvider.this, intent);
+                    return onShareListener.shareWithTwitter(intent);
                 } else if (applicationType == SharePackageHelper.ApplicationType.Facebook) {
-                    return onShareListener.shareWithFacebook(YetiActionProvider.this, intent);
+                    return onShareListener.shareWithFacebook(intent);
                 } else if (applicationType == SharePackageHelper.ApplicationType.GooglePlus) {
-                    return onShareListener.shareWithGooglePlus(YetiActionProvider.this, intent);
+                    return onShareListener.shareWithGooglePlus(intent);
                 } else if (applicationType == SharePackageHelper.ApplicationType.Email) {
-                    return onShareListener.shareWithEmail(YetiActionProvider.this, intent);
+                    return onShareListener.shareWithEmail(intent);
                 } else if (applicationType == SharePackageHelper.ApplicationType.Sms) {
-                    return onShareListener.shareWithSms(YetiActionProvider.this, intent);
+                    return onShareListener.shareWithSms(intent);
                 } else {
-                    return onShareListener.shareWithOther(YetiActionProvider.this, intent);
+                    return onShareListener.shareWithOther(intent);
                 }
             }
             return false;

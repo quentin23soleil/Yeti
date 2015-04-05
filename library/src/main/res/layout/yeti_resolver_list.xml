@@ -1,0 +1,60 @@
+<me.kentin.yeti.view.ResolverDrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/resolver_contentPanel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:maxWidth="@dimen/resolver_max_width"
+    app:maxCollapsedHeight="144dp">
+
+    <LinearLayout
+        android:id="@+id/resolver_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_alwaysShow="true"
+        android:orientation="vertical"
+        android:elevation="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/resolver_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="start|top"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="20dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:id="@+id/resolver_title"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="?android:attr/listPreferredItemHeight"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="start|center_vertical"
+                android:paddingEnd="16dp"
+                android:paddingRight="16dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/dividerVertical" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_light"
+        android:id="@+id/resolver_recyclerview"
+        android:scrollbars="vertical" />
+
+</me.kentin.yeti.view.ResolverDrawerLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.kentin.yetisample" >
+    xmlns:tools="http://schemas.android.com/tools"
+    package="me.kentin.sample" >
 
     <application
         android:allowBackup="true"
@@ -8,7 +9,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="me.kentin.sample.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,6 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="me.kentin.yeti.activity.YetiShareActivity"
+            android:excludeFromRecents="true"
+            android:theme="@style/BottomSheet.Light"
+            tools:ignore="UnusedAttribute" />
     </application>
 
 </manifest>

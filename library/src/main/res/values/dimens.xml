@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="resolver_max_width">600dp</dimen>
+    <dimen name="item_share_icon">36dp</dimen>
+    <dimen name="yeti_padding">16dp</dimen>
+    <dimen name="alert_dialog_button_bar_height">48dp</dimen>
+</resources>

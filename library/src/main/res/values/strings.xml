@@ -3,4 +3,6 @@
   <string name="shareactionprovider_share_with_application">toto</string>
   <string name="shareactionprovider_share_with">titi</string>
   <string name="activity_chooser_view_see_all">See all</string>
+  <string name="noApplications">No application</string>
+  <string name="whichSendApplication">Share with</string>
 </resources>

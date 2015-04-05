@@ -1,4 +1,4 @@
-package me.kentin.yetisample;
+package me.kentin.sample;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

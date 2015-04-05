@@ -1,4 +1,4 @@
-package me.kentin.yeti;
+package me.kentin.yeti.utils;
 
 import android.content.Intent;
 
