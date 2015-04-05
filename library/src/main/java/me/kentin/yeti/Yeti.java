@@ -1,6 +1,5 @@
 package me.kentin.yeti;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -11,25 +10,23 @@ import me.kentin.yeti.utils.SharePackageHelper;
 public class Yeti {
 
     private Context context;
-    private OnShareListener shareListener;
-    private Intent shareIntent;
 
     Yeti(Context context) {
         this.context = context;
     }
 
-    public static Yeti with(Activity context) {
+    public static Yeti with(Context context) {
         return new Yeti(context);
     }
 
     public Intent share(Intent shareIntent) {
-        this.shareIntent = shareIntent;
         return YetiShareActivity.createIntent(context, shareIntent);
     }
 
 
     public void result(Intent intent, OnShareListener onShareListener) {
         if (onShareListener != null) {
+
             SharePackageHelper.ApplicationType applicationType = new SharePackageHelper().getApplicationType(intent);
 
             if (applicationType == SharePackageHelper.ApplicationType.Twitter) {
