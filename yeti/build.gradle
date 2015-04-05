@@ -1,0 +1,104 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: "com.jfrog.bintray"
+
+version = "1.0.0"
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'com.android.support:recyclerview-v7:22.0.0'
+}
+
+// jcenter & maven config
+
+def siteUrl = 'https://github.com/dommerq/Yeti'
+def gitUrl = 'https://github.com/dommerq/Yeti.git'
+group = "me.kentin"  // Maven Group ID for the artifact
+
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+
+                name = "yeti"
+                // Add your description here
+                description = 'So fresh. Yeti helps you share to others.'
+                url siteUrl
+
+                // Set your license
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'dommerq'
+                        name 'Quentin Dommerc'
+                        email 'dommer.q@gmail.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+bintray {
+    Properties properties = new Properties()
+    File file = new File("local.properties")
+    if (file.exists()) {
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+        user = properties.getProperty("bintray.user")
+        key = properties.getProperty("bintray.apikey")
+
+        configurations = ['archives']
+        pkg {
+            repo = "Maven"
+            name = "Yeti"
+            websiteUrl = siteUrl
+            vcsUrl = gitUrl
+            licenses = ["Apache-2.0"]
+            publish = true
+        }
+    }
+}
