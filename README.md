@@ -103,6 +103,10 @@ Who uses that? Seriously.
 Or you can clone it and import `library` as a module.
 
 
+## Todo
+- "I want to share with Twitter, and Facebook only. Filter the apps pretty please."
+- Want something? Tell me. :)
+
 ## License
 
 Yeti is licensed under the Apache 2 license (you can use it in commercial and open source projects).
