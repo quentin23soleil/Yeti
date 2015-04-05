@@ -1,14 +1,8 @@
-language: android
-
-jdk: oraclejdk7
-
-notifications:
-  email: true
-
-android:
-  components:
-    - build-tools-22.0.1
-    - android-22
-    - extra-android-m2repository
-
-script: ./gradlew clean build
+image: bradrydzewski/android:r23
+env:
+script:
+  - ./gradlew clean build
+notify:
+  email:
+    recipients:
+      - dommer.q@gmail.com
