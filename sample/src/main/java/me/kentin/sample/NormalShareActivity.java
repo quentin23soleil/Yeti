@@ -26,7 +26,7 @@ public class NormalShareActivity extends ActionBarActivity {
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT, "This is the text BEFORE you change it bro. (if you want huh)");
 
-        yeti = Yeti.with(this).only(SharePackageHelper.ApplicationType.Facebook);
+        yeti = Yeti.with(this).only(SharePackageHelper.ApplicationType.Facebook, SharePackageHelper.ApplicationType.Twitter);
 
 
         Button button = (Button) findViewById(R.id.normal_share_button);
