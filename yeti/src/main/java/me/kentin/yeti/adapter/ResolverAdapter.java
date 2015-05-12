@@ -26,6 +26,7 @@ import java.util.List;
 
 import me.kentin.yeti.R;
 import me.kentin.yeti.utils.ChooserHistory;
+import me.kentin.yeti.utils.SharePackageHelper;
 
 public class ResolverAdapter extends RecyclerView.Adapter<ResolverAdapter.ViewHolder> {
 
@@ -49,11 +50,17 @@ public class ResolverAdapter extends RecyclerView.Adapter<ResolverAdapter.ViewHo
 
     private ChooserHistory history;
 
-    public ResolverAdapter(Context context, Intent shareIntent, OnItemClickedListener listener) {
+    private SharePackageHelper sharePackageHelper;
+
+    private List<SharePackageHelper.ApplicationType> acceptableTypes;
+
+    public ResolverAdapter(Context context, Intent shareIntent, OnItemClickedListener listener, List<SharePackageHelper.ApplicationType> acceptableTypes) {
         packageManager = context.getPackageManager();
         iconSize = context.getResources().getDimensionPixelSize(R.dimen.item_share_icon);
         this.shareIntent = shareIntent;
+        this.acceptableTypes = acceptableTypes;
         comparator = new ResolverComparator(context);
+        sharePackageHelper = new SharePackageHelper();
         setOnItemClickedListener(listener);
     }
 
@@ -137,8 +144,9 @@ public class ResolverAdapter extends RecyclerView.Adapter<ResolverAdapter.ViewHo
                     } catch (PackageManager.NameNotFoundException ignored) {
                     }
                 }
-
-                items.add(new DisplayResolveInfoWithIntent(resolveInfo, intent));
+                if (sharePackageHelper.isIntentAcceptable(resolveInfo, acceptableTypes)) {
+                    items.add(new DisplayResolveInfoWithIntent(resolveInfo, intent));
+                }
             }
         } else {
             List<ResolveInfo> resolveInfos = packageManager
@@ -148,7 +156,9 @@ public class ResolverAdapter extends RecyclerView.Adapter<ResolverAdapter.ViewHo
                 Intent intent = new Intent(shareIntent);
                 intent.setClassName(resolveInfo.activityInfo.packageName,
                         resolveInfo.activityInfo.name);
-                items.add(new DisplayResolveInfoWithIntent(resolveInfo, intent));
+                if (sharePackageHelper.isIntentAcceptable(resolveInfo, acceptableTypes)) {
+                    items.add(new DisplayResolveInfoWithIntent(resolveInfo, intent));
+                }
             }
         }
 

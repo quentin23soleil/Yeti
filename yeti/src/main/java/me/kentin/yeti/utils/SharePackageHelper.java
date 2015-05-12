@@ -1,6 +1,9 @@
 package me.kentin.yeti.utils;
 
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
+
+import java.util.List;
 
 public class SharePackageHelper {
 
@@ -103,6 +106,38 @@ public class SharePackageHelper {
             }
         }
         return ApplicationType.Other;
+    }
+
+    public boolean isIntentAcceptable(ResolveInfo resolveInfo, List<ApplicationType> acceptableTypes) {
+        for (ApplicationType type : acceptableTypes) {
+            String[] packageNames = getPackageNamesByType(type);
+            if (packageNames != null) {
+                for (String packageName : packageNames) {
+                    if (resolveInfo.activityInfo.packageName.equals(packageName)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private String[] getPackageNamesByType(ApplicationType type) {
+        switch (type) {
+            case Twitter:
+                return twitter;
+            case Facebook:
+                return facebook;
+            case Email:
+                return email;
+            case GooglePlus:
+                return googlePlus;
+            case Sms:
+                return sms;
+            default:
+                return null;
+        }
     }
 
     public enum ApplicationType {

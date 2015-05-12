@@ -10,17 +10,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.List;
+
 import me.kentin.yeti.R;
 import me.kentin.yeti.adapter.ResolverAdapter;
 import me.kentin.yeti.view.ResolverDrawerLayout;
+
+import static me.kentin.yeti.utils.SharePackageHelper.ApplicationType;
 
 public class YetiShareActivity extends Activity implements ResolverAdapter.OnItemClickedListener {
 
     public static final String EXTRA_SHARE_INTENT = "shareIntent";
 
+    private static List<ApplicationType> acceptableTypes;
+
     private Intent shareIntent;
 
-    public static Intent createIntent(Context context, Intent shareIntent) {
+    public static Intent createIntent(Context context, Intent shareIntent, List<ApplicationType> acceptableTypes) {
+        YetiShareActivity.acceptableTypes = acceptableTypes;
         Intent intent = new Intent(context, YetiShareActivity.class);
         intent.putExtra(EXTRA_SHARE_INTENT, shareIntent);
         return intent;
@@ -56,7 +63,7 @@ public class YetiShareActivity extends Activity implements ResolverAdapter.OnIte
     private ResolverAdapter createAdapter() {
         Intent intent = getIntent();
         shareIntent = intent.getParcelableExtra(EXTRA_SHARE_INTENT);
-        return new ResolverAdapter(this, shareIntent, this);
+        return new ResolverAdapter(this, shareIntent, this, acceptableTypes);
     }
 
     @Override
