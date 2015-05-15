@@ -8,7 +8,6 @@ import android.widget.Button;
 
 import me.kentin.yeti.Yeti;
 import me.kentin.yeti.listener.OnShareListener;
-import me.kentin.yeti.utils.SharePackageHelper;
 
 public class NormalShareActivity extends ActionBarActivity {
 
@@ -26,7 +25,7 @@ public class NormalShareActivity extends ActionBarActivity {
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT, "This is the text BEFORE you change it bro. (if you want huh)");
 
-        yeti = Yeti.with(this).only(SharePackageHelper.ApplicationType.Facebook, SharePackageHelper.ApplicationType.Twitter);
+        yeti = Yeti.with(this);
 
 
         Button button = (Button) findViewById(R.id.normal_share_button);

@@ -109,6 +109,9 @@ public class SharePackageHelper {
     }
 
     public boolean isIntentAcceptable(ResolveInfo resolveInfo, List<ApplicationType> acceptableTypes) {
+        if (acceptableTypes == null) {
+            return true;
+        }
         for (ApplicationType type : acceptableTypes) {
             String[] packageNames = getPackageNamesByType(type);
             if (packageNames != null) {
