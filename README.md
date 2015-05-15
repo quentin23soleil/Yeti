@@ -13,7 +13,7 @@ Let's say you want to add a "via @theTwitterAccountOfYourProduct" if the content
 **Gradle (jcenter)** [![Version](https://api.bintray.com/packages/dommerq/Maven/Yeti/images/download.svg)](https://bintray.com/dommerq/Maven/Yeti/_latestVersion)
 
 ```groovy
-compile 'me.kentin:yeti:1.0.0'
+compile 'me.kentin:yeti:1.1.0'
 ```
 **Maven**
 
@@ -106,8 +106,11 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 
 ## Todo
-- "I want to share with Twitter, and Facebook only. Filter the apps pretty please."
+- "I want to share with Twitter, and Facebook only. Filter the apps pretty please." ---> Done in 1.1.0
 - Want something? Tell me. :)
+
+## Contributors
+- [geralt-encore](https://github.com/geralt-encore) 
 
 ## License
 
