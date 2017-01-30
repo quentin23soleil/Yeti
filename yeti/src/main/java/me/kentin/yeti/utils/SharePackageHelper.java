@@ -34,6 +34,7 @@ public class SharePackageHelper {
 
     String[] facebook = new String[] {
             "com.facebook.katana",
+            "com.facebook.lite",
             "app.fastfacebook.com",
             "com.androdb.fastlitefb",
             "com.danvelazco.fbwrapper"
